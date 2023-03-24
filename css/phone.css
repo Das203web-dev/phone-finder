@@ -3,3 +3,12 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 }
+
+.image {
+    width: auto;
+    height: auto;
+}
+
+#see-more-button {
+    display: none;
+}
