@@ -53,16 +53,16 @@ const displayPhone = phones => {
             // console.log(phone)
             // const displayDiv = document.getElementById('display-div');
             const div = document.createElement('div');
-            div.classList.add('mx-auto')
+            div.classList.add('col')
             div.innerHTML = `
-            <div class="card p-3" style="width: 18rem;">
-                <img src="${phone.image}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title p-2">${phone.brand}</h5>
-                    <p>${phone.phone_name}</p>
-                    <button onclick="phoneDetails('${phone.slug}')" class="btn btn-primary p-2">Details</button>
+                <div class="card p-3 col-sm-12 col-md-6 col-lg-4 mb-sm-5 mb-5 container-fluid" style="width: 18rem;">
+                    <img src="${phone.image}" class="card-img-top img-fluid" alt="...">
+                     <div class="card-body">
+                        <h5 class="card-title">${phone.brand}</h5>
+                        <p>${phone.phone_name}</p>
+                        <button onclick="phoneDetails('${phone.slug}')" class="btn btn-primary p-2">Details</button>
+                    </div>
                 </div>
-            </div>
             `;
             displayDiv.appendChild(div);
         });
@@ -97,12 +97,12 @@ const displayRestPhones = (restPhones) => {
         const phones = restPhones[i]
         // console.log(phones.phone_name)
         const div = document.createElement('div');
-        div.classList.add('mx-auto')
+        div.classList.add('col')
         div.innerHTML = `
-            <div class="card p-3" style="width: 18rem;">
+            <div class="card p-3 col-sm-12 col-md-6 col-lg-4 mb-sm-5 mb-5 container-fluid" style="width: 18rem;">
                 <img src="${phones.image}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title p-2">${phones.brand}</h5>
+                    <h5 class="card-title">${phones.brand}</h5>
                     <p>${phones.phone_name}</p>
                     <button onclick="phoneDetails('${phones.slug}')" class="btn btn-primary p-2">Details</button>
                 </div>
@@ -126,15 +126,15 @@ const phoneDetails = details => {
             if (data.status === true) {
                 // console.log(data.data)
                 const detailsDiv = document.createElement('div');
-                detailsDiv.style.display = 'flex';
-                detailsDiv.style.alignItems = 'center';
-                detailsDiv.style.justifyContent = 'center';
+                // detailsDiv.style.display = 'flex';
+                // detailsDiv.style.alignItems = 'center';
+                // detailsDiv.style.justifyContent = 'center';
                 // detailsDiv.classList.add('mx-auto')
                 detailsDiv.innerHTML = `
-                <div class="card p-3" style="width: 25%;">
-                    <h5 class="card-title p-2">${data.data.name}</h5>
-                    <img src="${data.data.image}" class="card-img-top image">
-                        <div class="card-body">
+                <div class="card p-3 w-100 w-lg-50 w-md-50 w-lg-50">
+                    <h5 class="card-title p-2 text-center">${data.data.name}</h5>
+                    <img src="${data.data.image}" class="card-img-top image w-50 mx-auto h-50">
+                        <div class="card-body text-center">
                         
                             <p>${data.data.releaseDate}</p>
                             <p>${data.data.mainFeatures.chipSet}</p>
