@@ -1,8 +1,11 @@
+//loading api
 const loadApi = () => {
     const inputField = document.getElementById('input-field');
     const inputValue = inputField.value;
+    //handeling empty input error
     if (inputValue === '') {
         inputField.value = "Can't search empty value";
+        //cleaning the input field after clicking
         inputField.addEventListener('click', function () {
             inputField.value = '';
         })
@@ -13,6 +16,7 @@ const loadApi = () => {
             .then(data => displayPhone(data))
     }
 }
+//displaying the product
 const displayPhone = phones => {
     console.log(phones.data[0])
     let PhoneStatus = phones.status;
@@ -20,8 +24,10 @@ const displayPhone = phones => {
     const displayDiv = document.getElementById('display-div');
     displayDiv.textContent = '';
     // console.log(PhoneStatus);
+    //displaying the phones after checking the phone status
     if (PhoneStatus === true) {
         console.log(numberOfPhones);
+        //condition for not displaying over 20 phones onpage/UI
         if (numberOfPhones.length > 20) {
             numberOfPhones = numberOfPhones.slice(0, 20);
         }
@@ -73,11 +79,17 @@ const phoneDetails = details => {
                 // detailsDiv.classList.add('mx-auto')
                 detailsDiv.innerHTML = `
                 <div class="card p-3" style="width: 18rem;">
-                    <img src="${data.data.image
-                    }" class="card-img-top" alt="...">
+                <h5 class="card-title p-2">${data.data.name}</h5>
+                    <img src="${data.data.image}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title p-2">${data.data.name}</h5>
+                        
                         <p>${data.data.releaseDate}</p>
+                        <p>${data.data.mainFeatures.chipSet}</p>
+                        <p>${data.data.mainFeatures.displaySize}</p>
+                        <p>${data.data.mainFeatures.memory}</p>
+                        <p>${data.data.mainFeatures.sensors[0]} ${data.data.mainFeatures.sensors[1]},${data.data.mainFeatures.sensors[2]},${data.data.mainFeatures.sensors[3]},${data.data.mainFeatures.sensors[4]},${data.data.mainFeatures.sensors[5]}</p>
+                        <p>('${data.data.others.Bluetooth}')</p>
+                        <p>${data.data.others.GPS}</p>
                     </div>
                 </div>
                 `;
