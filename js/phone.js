@@ -131,9 +131,9 @@ const phoneDetails = details => {
                 // detailsDiv.style.justifyContent = 'center';
                 // detailsDiv.classList.add('mx-auto')
                 detailsDiv.innerHTML = `
-                <div class="card p-3 w-100 w-lg-50 w-md-50 w-lg-50">
+                <div class="card p-3">
                     <h5 class="card-title p-2 text-center">${data.data.name}</h5>
-                    <img src="${data.data.image}" class="card-img-top image w-50 mx-auto h-50">
+                    <img src="${data.data.image}" class="card-img-top image w-50 h-50 mx-auto">
                         <div class="card-body text-center">
                         
                             <p>${data.data.releaseDate}</p>
