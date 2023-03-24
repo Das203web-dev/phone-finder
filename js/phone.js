@@ -26,15 +26,19 @@ const displayPhone = phones => {
             numberOfPhones = numberOfPhones.slice(0, 20);
         }
         numberOfPhones.forEach(phone => {
+            const inputField = document.getElementById('input-field');
+            inputField.addEventListener('click', function () {
+                inputField.value = '';
+            })
             // const displayDiv = document.getElementById('display-div');
             const div = document.createElement('div');
             div.classList.add('mx-auto')
             div.innerHTML = `
-            <div onclick="phoneDetails('${phone.slug}')" class="card p-3" style="width: 18rem;">
+            <div class="card p-3" style="width: 18rem;">
                 <img src="${phone.image}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title p-2">${phone.brand}</h5>
-                    <a href="#" class="btn btn-primary p-2">Details</a>
+                    <button onclick="phoneDetails('${phone.slug}')" class="btn btn-primary p-2">Details</button>
                 </div>
             </div>
             `;
@@ -42,9 +46,9 @@ const displayPhone = phones => {
         })
     }
     else {
-        displayDiv.style.display = 'flex'
-        displayDiv.style.alignItems = 'center'
-        displayDiv.style.justifyContent = 'center'
+        displayDiv.style.display = 'flex';
+        displayDiv.style.alignItems = 'center';
+        displayDiv.style.justifyContent = 'center';
         displayDiv.innerHTML = `
             <div class="card" style="width: 18rem;">                
                 <div class="card-body">
@@ -55,4 +59,32 @@ const displayPhone = phones => {
 }
 const phoneDetails = details => {
     console.log(details)
+    const productDetails = document.getElementById('product-details-div');
+    productDetails.textContent = '';
+    fetch(`https://openapi.programming-hero.com/api/phone/${details}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === true) {
+                console.log(data.data)
+                const detailsDiv = document.createElement('div');
+                detailsDiv.style.display = 'flex';
+                detailsDiv.style.alignItems = 'center';
+                detailsDiv.style.justifyContent = 'center';
+                // detailsDiv.classList.add('mx-auto')
+                detailsDiv.innerHTML = `
+                <div class="card p-3" style="width: 18rem;">
+                    <img src="${data.data.image
+                    }" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title p-2">${data.data.name}</h5>
+                        <p>${data.data.releaseDate}</p>
+                    </div>
+                </div>
+                `;
+                productDetails.appendChild(detailsDiv)
+            }
+            else {
+                productDetails.innerText = 'Phone not found'
+            }
+        })
 }
